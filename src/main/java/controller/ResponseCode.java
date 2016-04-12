@@ -1,4 +1,4 @@
-package main;
+package controller;
 
 /**
  * Created by morev on 10.04.16.

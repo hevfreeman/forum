@@ -3,6 +3,7 @@ package model;
 import javax.json.Json;
 import javax.json.JsonException;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import java.util.InvalidPropertiesFormatException;
  * Created by morev on 10.04.16.
  */
 public class User {
-    private static final String DEFAULT = "NONE";
+    private static final String DEFAULT = "NOT STATED!!1";
 
     private int uid;
 
@@ -39,9 +40,6 @@ public class User {
     }
 
     public User(ResultSet set) throws SQLException{
-        /*for(Field f: this.getClass().getFields()){
-            f.getName()
-        }*/
         uid = set.getInt("id");
         email = set.getString("email");
         username = set.getString("username");
@@ -118,13 +116,16 @@ public class User {
     }
 
     public JsonObject toJson() {
+        return this.toJsonObjectBuider().build();
+    }
+
+    public JsonObjectBuilder toJsonObjectBuider() {
         return Json.createObjectBuilder()
                 .add("id", uid)
                 .add("email", email)
                 .add("name", name)
                 .add("about", about)
                 .add("isAnonymous", isAnonymous)
-                .add("username", username)
-                .build();
+                .add("username", username);
     }
 }
