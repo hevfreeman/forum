@@ -12,8 +12,8 @@ import java.util.InvalidPropertiesFormatException;
 /**
  * Created by morev on 10.04.16.
  */
-public class User {
-    private static final String DEFAULT = "NOT STATED!!1";
+public class User implements Jsonable{
+    private static final String DEFAULT = "NOT STATED!!1"; //TODO remove
 
     private int uid;
 
@@ -40,7 +40,8 @@ public class User {
     }
 
     public User(ResultSet set) throws SQLException{
-        uid = set.getInt("id");
+        set.next();
+        uid = set.getInt("uid");
         email = set.getString("email");
         username = set.getString("username");
         password = set.getString("password");
@@ -115,11 +116,7 @@ public class User {
         isAnonymous = anonymous;
     }
 
-    public JsonObject toJson() {
-        return this.toJsonObjectBuider().build();
-    }
-
-    public JsonObjectBuilder toJsonObjectBuider() {
+    public JsonObjectBuilder toShortJsonObjectBuider() {
         return Json.createObjectBuilder()
                 .add("id", uid)
                 .add("email", email)
@@ -128,4 +125,6 @@ public class User {
                 .add("isAnonymous", isAnonymous)
                 .add("username", username);
     }
+
+
 }

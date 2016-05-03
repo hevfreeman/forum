@@ -1,6 +1,5 @@
 package main;
 
-import controller.ResponseCode;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +47,7 @@ public class BaseController {
             e.printStackTrace();
         }
 
-        responseBuilder.add("code", ResponseCode.OK.value());
+        responseBuilder.add("code", ResponseBuilder.ResponseCode.OK.value());
         responseBuilder.add("response", "OK");
         String response = responseBuilder.build().toString();
         System.out.println(response);
@@ -106,7 +105,7 @@ public class BaseController {
             builder.add("forum", count_forum);
             builder.add("post", count_post);
 
-            responseBuilder.add("code", ResponseCode.OK.value());
+            responseBuilder.add("code", ResponseBuilder.ResponseCode.OK.value());
             responseBuilder.add("response", builder);
         } catch (SQLException e) {
             e.printStackTrace();
